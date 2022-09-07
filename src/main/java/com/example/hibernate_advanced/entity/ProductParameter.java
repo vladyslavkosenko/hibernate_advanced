@@ -1,14 +1,25 @@
 package com.example.hibernate_advanced.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
 @Entity
 public class ProductParameter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String parameter;
 
-    @OneToMany(mappedBy = "productParameter")
-    List<Product> products;
+    public ProductParameter(String parameter) {
+        this.parameter = parameter;
+    }
+
+    public ProductParameter() {
+    }
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn
+    private Product product;
 }

@@ -1,43 +1,35 @@
 package com.example.hibernate_advanced.entity;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Data
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private BigDecimal price;
+    private String name;
+    private String price;
 
-    @ManyToMany
-    @JoinColumn
-    private Category category;
-    @ManyToOne
-    @JoinColumn
-    private ProductParameter productParameter;
-
-    public long getId() {
-        return id;
+    public Product() {
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
+    public Product(String price, String name) {
         this.price = price;
+        this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
-    }
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable
+    private List<Category> categories;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<ProductParameter> productParameter;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private ProductDescription productDescription;
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setProductParameter(ProductParameter productParameter) {
     }
 }
