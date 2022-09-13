@@ -11,11 +11,11 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
-public class MyService {
+public class ProductService {
     private final ProductRepository productRepository;
 
     @Autowired
-    public MyService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
