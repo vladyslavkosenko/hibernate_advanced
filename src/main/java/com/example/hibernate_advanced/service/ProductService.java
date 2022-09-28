@@ -22,12 +22,19 @@ public class ProductService {
     @PostConstruct
     void init() {
         Product product = new Product("10", "name");
-        ProductDescription productDescription = new ProductDescription("ProductDescription ");
-        ProductParameter productParameter = new ProductParameter("ProductParameter ");
-        Category category = new Category("Category ");
+        Product product1 = new Product("20", "newName");
+        ProductDescription productDescription = new ProductDescription("ProductDescription 0");
+        ProductDescription productDescription1 = new ProductDescription("ProductDescription 1");
+        ProductParameter productParameter = new ProductParameter("ProductParameter 0");
+        ProductParameter productParameter1 = new ProductParameter("ProductParameter 1");
+        Category category = new Category("Category 0");
+        Category category1 = new Category("Category 1");
         product.setProductDescription(productDescription);
         product.setProductParameter(productParameter);
-        product.setCategories(List.of(category));
+        product.setCategories(List.of(category, category1));
+        product1.setProductDescription(productDescription1);
+        product1.setProductParameter(productParameter1);
+        product1.setCategories(List.of(category, category1));
         productRepository.saveAll(List.of(product));
     }
 
